@@ -12,6 +12,8 @@
 @interface UsersList ()
 
 @property (strong) IBOutlet NSTableView *usersTable;
+@property (strong) IBOutlet NSSearchField *searchField;
+@property (strong) IBOutlet NSPopUpButton *authorityPopup;
 
 @property (strong) IUIdentityQuery *query;
 
@@ -33,7 +35,13 @@
 {
     [super viewDidLoad];
     self.query = [[IUIdentityQuery alloc] init];
-    [self.query startWithEventBlock:
+    [self restartQuery];
+}
+
+- (void)restartQuery
+{
+    NSInteger tag = self.authorityPopup.selectedItem.tag;
+    [self.query startForName:self.searchField.stringValue authority:(IUIdentityQueryAuthority)tag eventBlock:
         ^(CSIdentityQueryEvent event, NSError * _Nonnull anError)
         {
             [self.usersTable reloadData];
@@ -53,6 +61,18 @@
     IUIdentity *identity = [self.query.identities objectAtIndex:row];
     view.textField.stringValue = identity.fullName;
     return view;
+}
+
+#pragma mark -
+
+- (IBAction)searchFieldDidChange:(id)sender
+{
+    [self restartQuery];
+}
+
+- (IBAction)authorityDidChange:(id)sender
+{
+    [self restartQuery];
 }
 
 @end

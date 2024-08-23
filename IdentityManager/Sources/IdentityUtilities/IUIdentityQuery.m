@@ -138,7 +138,8 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
     [me queryEvent:event identities:identities error:error];
 }
 
-- (void)startForName:(NSString *)aName eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
+- (void)startForName:(NSString *)aName authority:(IUIdentityQueryAuthority)anAuthority
+    eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
 {
     [self stop];
 
@@ -147,24 +148,9 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
     CSIdentityQueryClientContext clientContext = { 0, (__bridge void *)(self), NULL, NULL, NULL, QueryEventCallback };
 
     /* Create a new identity query with the name passed in, most likely taken from the search field */
-    self.identityQuery = CSIdentityQueryCreateForName(NULL, (__bridge CFStringRef)aName, kCSIdentityQueryStringBeginsWith,
-        kCSIdentityClassUser, CSGetLocalIdentityAuthority());
-
-    /* Run the query asynchronously and we'll get callbacks sent to our QueryEventCallback function. */
-    CSIdentityQueryExecuteAsynchronously(self.identityQuery, kCSIdentityQueryGenerateUpdateEvents, &clientContext,
-        CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
-}
-
-- (void)startWithEventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
-{
-    [self stop];
-
-    self.eventBlock = anEventBlock;
-
-    CSIdentityQueryClientContext clientContext = { 0, (__bridge void *)(self), NULL, NULL, NULL, QueryEventCallback };
-
-    /* Create a new identity query with the name passed in, most likely taken from the search field */
-    self.identityQuery = CSIdentityQueryCreate(kCFAllocatorDefault, kCSIdentityClassUser, CSGetLocalIdentityAuthority());
+    self.identityQuery = CSIdentityQueryCreateForName(NULL, (__bridge CFStringRef)aName,
+        kCSIdentityQueryStringBeginsWith,
+        kCSIdentityClassUser, [self authorityForType:anAuthority]);
 
     /* Run the query asynchronously and we'll get callbacks sent to our QueryEventCallback function. */
     CSIdentityQueryExecuteAsynchronously(self.identityQuery, kCSIdentityQueryGenerateUpdateEvents, &clientContext,
@@ -200,6 +186,18 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
     {
         self.eventBlock(event, (__bridge NSError *)(error));
     }
+}
+
+- (CSIdentityAuthorityRef)authorityForType:(IUIdentityQueryAuthority)anAuthorityType
+{
+    switch (anAuthorityType)
+    {
+        case IUIdentityQueryAuthorityManaged: return CSGetManagedIdentityAuthority();
+        case IUIdentityQueryAuthorityDefault: return CSGetDefaultIdentityAuthority();
+        default:
+            break;
+    }
+    return CSGetLocalIdentityAuthority();
 }
 
 @end

@@ -10,6 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, IUIdentityQueryAuthority)
+{
+    IUIdentityQueryAuthorityLocal,
+    IUIdentityQueryAuthorityManaged,
+    IUIdentityQueryAuthorityDefault,
+};
+
 @interface IUIdentityQuery : NSObject
 
 + (NSArray *)localUsers;
@@ -22,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(readonly) NSArray *identities;
 
-- (void)startForName:(NSString *)aName eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
-- (void)startWithEventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
+- (void)startForName:(NSString *)aName authority:(IUIdentityQueryAuthority)anAuthority
+    eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
 - (void)stop;
 
 @end
