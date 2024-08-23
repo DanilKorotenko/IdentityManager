@@ -5,11 +5,11 @@
 //  Created by Danil Korotenko on 8/20/24.
 //
 
-#import "UsersList.h"
+#import "IdentityList.h"
 
 #import "IdentityUtilities/IUIdentityQuery.h"
 
-@interface UsersList ()
+@interface IdentityList ()
 
 @property (strong) IBOutlet NSTableView *usersTable;
 @property (strong) IBOutlet NSSearchField *searchField;
@@ -19,11 +19,11 @@
 
 @end
 
-@implementation UsersList
+@implementation IdentityList
 
 - (instancetype)init
 {
-    self = [super initWithNibName:@"UsersList" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"IdentityList" bundle:[NSBundle mainBundle]];
     if (self)
     {
 

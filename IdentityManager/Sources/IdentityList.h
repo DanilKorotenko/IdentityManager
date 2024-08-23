@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UsersList : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+@interface IdentityList : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
 
 @end
 

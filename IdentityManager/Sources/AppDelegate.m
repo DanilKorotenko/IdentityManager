@@ -7,13 +7,13 @@
 
 #import "AppDelegate.h"
 
-#import "UsersList.h"
+#import "IdentityList.h"
 
 @interface AppDelegate ()
 
 @property (strong) IBOutlet NSWindow *window;
 
-@property (strong) UsersList *generalUsersList;
+@property (strong) IdentityList *generalUsersList;
 
 @end
 
@@ -21,7 +21,7 @@
 
 - (void)awakeFromNib
 {
-    self.generalUsersList = [[UsersList alloc] init];
+    self.generalUsersList = [[IdentityList alloc] init];
     self.window.contentView = self.generalUsersList.view;
 }
 
