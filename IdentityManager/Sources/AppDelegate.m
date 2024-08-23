@@ -12,8 +12,10 @@
 @interface AppDelegate ()
 
 @property (strong) IBOutlet NSWindow *window;
+@property (strong) IBOutlet NSTabView *tabView;
 
 @property (strong) IdentityList *generalUsersList;
+@property (strong) IdentityList *generalGroupsList;
 
 @end
 
@@ -22,7 +24,10 @@
 - (void)awakeFromNib
 {
     self.generalUsersList = [[IdentityList alloc] init];
-    self.window.contentView = self.generalUsersList.view;
+    self.generalGroupsList = [[IdentityList alloc] init];
+
+    [self.tabView tabViewItemAtIndex:0].view = self.generalUsersList.view;
+    [self.tabView tabViewItemAtIndex:1].view = self.generalGroupsList.view;
 }
 
 #pragma mark app delegate
