@@ -13,10 +13,23 @@
 
 @implementation UsersList
 
+- (instancetype)init
+{
+    self = [super initWithNibName:@"UsersList" bundle:[NSBundle mainBundle]];
+    if (self)
+    {
+
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do view setup here.
+
 }
+
+#pragma mark table
+
 
 @end
