@@ -29,7 +29,9 @@ typedef NS_ENUM(NSUInteger, IUIdentityQueryAuthority)
 
 @property(readonly) NSArray *identities;
 
-- (void)startForName:(NSString *)aName authority:(IUIdentityQueryAuthority)anAuthority
+- (void)startForName:(NSString *)aName
+    authority:(IUIdentityQueryAuthority)anAuthority
+    identityClass:(CSIdentityClass)anIdentityClass
     eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
 - (void)stop;
 

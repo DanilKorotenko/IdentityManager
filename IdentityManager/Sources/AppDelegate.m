@@ -23,8 +23,8 @@
 
 - (void)awakeFromNib
 {
-    self.generalUsersList = [[IdentityList alloc] init];
-    self.generalGroupsList = [[IdentityList alloc] init];
+    self.generalUsersList = [[IdentityList alloc] initUsers];
+    self.generalGroupsList = [[IdentityList alloc] initGroups];
 
     [self.tabView tabViewItemAtIndex:0].view = self.generalUsersList.view;
     [self.tabView tabViewItemAtIndex:1].view = self.generalGroupsList.view;

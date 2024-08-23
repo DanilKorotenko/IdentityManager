@@ -138,7 +138,9 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
     [me queryEvent:event identities:identities error:error];
 }
 
-- (void)startForName:(NSString *)aName authority:(IUIdentityQueryAuthority)anAuthority
+- (void)startForName:(NSString *)aName
+    authority:(IUIdentityQueryAuthority)anAuthority
+    identityClass:(CSIdentityClass)anIdentityClass
     eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
 {
     [self stop];
@@ -148,9 +150,10 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
     CSIdentityQueryClientContext clientContext = { 0, (__bridge void *)(self), NULL, NULL, NULL, QueryEventCallback };
 
     /* Create a new identity query with the name passed in, most likely taken from the search field */
-    self.identityQuery = CSIdentityQueryCreateForName(NULL, (__bridge CFStringRef)aName,
+    self.identityQuery = CSIdentityQueryCreateForName(kCFAllocatorDefault,
+        (__bridge CFStringRef)aName,
         kCSIdentityQueryStringBeginsWith,
-        kCSIdentityClassUser, [self authorityForType:anAuthority]);
+        anIdentityClass, [self authorityForType:anAuthority]);
 
     /* Run the query asynchronously and we'll get callbacks sent to our QueryEventCallback function. */
     CSIdentityQueryExecuteAsynchronously(self.identityQuery,

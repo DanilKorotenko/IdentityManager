@@ -19,18 +19,31 @@
 
 @property (readonly) NSArray *identitites;
 
+@property (readonly) CSIdentityClass identityClass;
+
 @end
 
 @implementation IdentityList
 
 @synthesize identitites;
+@synthesize identityClass;
 
-- (instancetype)init
+- (instancetype)initUsers
 {
     self = [super initWithNibName:@"IdentityList" bundle:[NSBundle mainBundle]];
     if (self)
     {
+        identityClass = kCSIdentityClassUser;
+    }
+    return self;
+}
 
+- (instancetype)initGroups
+{
+    self = [super initWithNibName:@"IdentityList" bundle:[NSBundle mainBundle]];
+    if (self)
+    {
+        identityClass = kCSIdentityClassGroup;
     }
     return self;
 }
@@ -45,7 +58,10 @@
 - (void)restartQuery
 {
     NSInteger tag = self.authorityPopup.selectedItem.tag;
-    [self.query startForName:self.searchField.stringValue authority:(IUIdentityQueryAuthority)tag eventBlock:
+    [self.query startForName:self.searchField.stringValue
+        authority:(IUIdentityQueryAuthority)tag
+        identityClass:self.identityClass
+        eventBlock:
         ^(CSIdentityQueryEvent event, NSError * _Nonnull anError)
         {
             self->identitites = nil;

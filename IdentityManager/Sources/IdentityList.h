@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IdentityList : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
 
+- (instancetype)initUsers;
+- (instancetype)initGroups;
+
 @end
 
 NS_ASSUME_NONNULL_END
