@@ -153,7 +153,9 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
         kCSIdentityClassUser, [self authorityForType:anAuthority]);
 
     /* Run the query asynchronously and we'll get callbacks sent to our QueryEventCallback function. */
-    CSIdentityQueryExecuteAsynchronously(self.identityQuery, kCSIdentityQueryGenerateUpdateEvents, &clientContext,
+    CSIdentityQueryExecuteAsynchronously(self.identityQuery,
+        kCSIdentityQueryGenerateUpdateEvents | kCSIdentityQueryIncludeHiddenIdentities,
+        &clientContext,
         CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
 }
 

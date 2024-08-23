@@ -17,9 +17,13 @@
 
 @property (strong) IUIdentityQuery *query;
 
+@property (readonly) NSArray *identitites;
+
 @end
 
 @implementation IdentityList
+
+@synthesize identitites;
 
 - (instancetype)init
 {
@@ -44,21 +48,37 @@
     [self.query startForName:self.searchField.stringValue authority:(IUIdentityQueryAuthority)tag eventBlock:
         ^(CSIdentityQueryEvent event, NSError * _Nonnull anError)
         {
+            self->identitites = nil;
             [self.usersTable reloadData];
         }];
+}
+
+- (NSArray *)identitites
+{
+    if (identitites == nil)
+    {
+        NSMutableArray *result = [NSMutableArray arrayWithArray:self.query.identities];
+        [result sortUsingComparator:
+            ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2)
+            {
+                return [[(IUIdentity *)obj1 fullName] compare:[(IUIdentity *)obj2 fullName]];
+            }];
+        identitites = result;
+    }
+    return identitites;
 }
 
 #pragma mark table
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.query.identities.count;
+    return self.identitites.count;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     NSTableCellView *view = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    IUIdentity *identity = [self.query.identities objectAtIndex:row];
+    IUIdentity *identity = [self.identitites objectAtIndex:row];
     view.textField.stringValue = identity.fullName;
     return view;
 }
