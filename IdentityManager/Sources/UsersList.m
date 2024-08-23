@@ -47,4 +47,12 @@
     return self.query.identities.count;
 }
 
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    NSTableCellView *view = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+    IUIdentity *identity = [self.query.identities objectAtIndex:row];
+    view.textField.stringValue = identity.fullName;
+    return view;
+}
+
 @end
