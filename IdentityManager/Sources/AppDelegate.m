@@ -7,15 +7,15 @@
 
 #import "AppDelegate.h"
 
-#import "IdentityList.h"
+#import "IdentityNameList.h"
 
 @interface AppDelegate ()
 
 @property (strong) IBOutlet NSWindow *window;
 @property (strong) IBOutlet NSTabView *tabView;
 
-@property (strong) IdentityList *generalUsersList;
-@property (strong) IdentityList *generalGroupsList;
+@property (strong) IdentityNameList *generalUsersList;
+@property (strong) IdentityNameList *generalGroupsList;
 
 @end
 
@@ -23,8 +23,8 @@
 
 - (void)awakeFromNib
 {
-    self.generalUsersList = [[IdentityList alloc] initUsers];
-    self.generalGroupsList = [[IdentityList alloc] initGroups];
+    self.generalUsersList = [[IdentityNameList alloc] init];
+    self.generalGroupsList = [[IdentityNameList alloc] initGroups];
 
     [self.tabView tabViewItemAtIndex:0].view = self.generalUsersList.view;
     [self.tabView tabViewItemAtIndex:1].view = self.generalGroupsList.view;

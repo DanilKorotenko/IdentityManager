@@ -19,21 +19,11 @@ typedef NS_ENUM(NSUInteger, IUIdentityQueryAuthority)
 
 @interface IUIdentityQuery : NSObject
 
-+ (NSArray *)localUsers;
-+ (NSArray *)localGroups;
-
-// returns identity for user with exact match by FullName
++ (IUIdentity *)administratorsGroup;
 + (IUIdentity *)localUserWithFullName:(NSString *)aName;
 
-+ (IUIdentity *)administratorsGroup;
-
-@property(readonly) NSArray *identities;
-
-- (void)startForName:(NSString *)aName
-    authority:(IUIdentityQueryAuthority)anAuthority
-    identityClass:(CSIdentityClass)anIdentityClass
-    eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
-- (void)stop;
+@property(readonly) CSIdentityQueryRef  identityQuery;
+@property(readonly) NSArray             *identities;
 
 @end
 

@@ -6,7 +6,7 @@
 //
 
 #import "IUIdentity.h"
-#import "IUIdentityQuery.h"
+#import "IUIdentityQuery/IUIdentityQuery.h"
 
 @interface IUIdentity ()
 
@@ -189,8 +189,14 @@
 // is member of admin group
 - (BOOL)isAdmin
 {
-    Boolean result = CSIdentityIsMemberOfGroup(self.identity, [IUIdentityQuery administratorsGroup].identity);
+    Boolean result = CSIdentityIsMemberOfGroup(self.identity,
+        [IUIdentityQuery administratorsGroup].identity);
     return result ? YES : NO;
+}
+
+- (CSIdentityQueryRef)groupMemebershipQuery
+{
+    return CSIdentityCreateGroupMembershipQuery(kCFAllocatorDefault, self.identity);
 }
 
 #pragma mark -
