@@ -5,50 +5,43 @@
 //  Created by Danil Korotenko on 8/20/24.
 //
 
-#import "IdentityNameList.h"
+#import "IdentityList.h"
 
 #import "IdentityUtilities/IUIdentityQuery/IUIdentityQueryNameWatcher.h"
 
 #import "IdentityListWindow.h"
 
-@interface IdentityNameList ()
+@interface IdentityList ()
 
 @property (strong) IBOutlet NSTableView *usersTable;
-@property (strong) IBOutlet NSSearchField *searchField;
-@property (strong) IBOutlet NSPopUpButton *authorityPopup;
 
-@property (readonly) IUIdentityQueryNameWatcher *queryNameWatcher;
+@property (strong) IUIdentityQueryWatcher *queryWatcher;
 
 @property (readonly) NSArray *identitites;
 
-@property (readonly) CSIdentityClass identityClass;
-
 @end
 
-@implementation IdentityNameList
+@implementation IdentityList
 
 @synthesize identitites;
-@synthesize identityClass;
-@synthesize queryNameWatcher;
 
 - (instancetype)init
 {
-    self = [super initWithNibName:@"IdentityNameList" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"IdentityList" bundle:[NSBundle mainBundle]];
     if (self)
     {
-        identityClass = kCSIdentityClassUser;
-        queryNameWatcher = [[IUIdentityQueryNameWatcher alloc] init];
+
     }
     return self;
 }
 
-- (instancetype)initGroups
+
+- (instancetype)initWithIdentityQuery:(CSIdentityQueryRef)aGroupMemebershipQuery
 {
     self = [self init];
     if (self)
     {
-        identityClass = kCSIdentityClassGroup;
-        queryNameWatcher = [[IUIdentityQueryNameWatcher alloc] init];
+        self.queryWatcher = [[IUIdentityQueryWatcher alloc] initWithIdentityQuery:aGroupMemebershipQuery];
     }
     return self;
 }
@@ -62,11 +55,7 @@
 
 - (void)restartQuery
 {
-    NSInteger tag = self.authorityPopup.selectedItem.tag;
-    [self.queryNameWatcher startForName:self.searchField.stringValue
-        authority:(IUIdentityQueryAuthority)tag
-        identityClass:self.identityClass
-        eventBlock:
+    [self.queryWatcher startWithEventBlock:
         ^(CSIdentityQueryEvent event, NSError * _Nonnull anError)
         {
             self->identitites = nil;
@@ -78,7 +67,7 @@
 {
     if (identitites == nil)
     {
-        NSMutableArray *result = [NSMutableArray arrayWithArray:self.queryNameWatcher.identities];
+        NSMutableArray *result = [NSMutableArray arrayWithArray:self.queryWatcher.identities];
         [result sortUsingComparator:
             ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2)
             {
@@ -105,16 +94,6 @@
 }
 
 #pragma mark -
-
-- (IBAction)searchFieldDidChange:(id)sender
-{
-    [self restartQuery];
-}
-
-- (IBAction)authorityDidChange:(id)sender
-{
-    [self restartQuery];
-}
 
 - (IBAction)tableDoubleAction:(id)sender
 {

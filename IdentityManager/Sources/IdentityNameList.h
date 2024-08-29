@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init;
 - (instancetype)initGroups;
-- (instancetype)initWithGroupIdentity:(IUIdentity *)aGroup;
 
 @end
 

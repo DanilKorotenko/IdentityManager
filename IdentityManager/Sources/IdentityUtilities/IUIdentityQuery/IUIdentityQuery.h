@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, IUIdentityQueryAuthority)
 + (IUIdentity *)administratorsGroup;
 + (IUIdentity *)localUserWithFullName:(NSString *)aName;
 
+- (instancetype)initWithIdentityQuery:(CSIdentityQueryRef)anIdentityQuery;
+
 @property(readonly) CSIdentityQueryRef  identityQuery;
 @property(readonly) NSArray             *identities;
 

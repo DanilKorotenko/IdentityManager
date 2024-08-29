@@ -7,24 +7,22 @@
 
 #import "IdentityListWindow.h"
 
-#import "IdentityUtilities/IUIdentityQuery/IUIdentityQueryWatcher.h"
-#import "IdentityNameList.h"
+#import "IdentityList.h"
 
 @interface IdentityListWindow ()
 
-@property(strong) IUIdentity *groupIdentity;
-@property(strong) IdentityNameList *list;
+@property(strong) IdentityList *list;
 
 @end
 
 @implementation IdentityListWindow
 
-- (instancetype)initWithGroup:(IUIdentity *)aGroup
+- (instancetype)initWithQuery:(CSIdentityQueryRef)aGroupMemebershipQuery
 {
     self = [super initWithWindowNibName:@"IdentityListWindow"];
     if (self)
     {
-        self.groupIdentity = aGroup;
+        self.list = [[IdentityList alloc] initWithIdentityQuery:aGroupMemebershipQuery];
     }
     return self;
 }
@@ -32,7 +30,7 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    self.list = [[IdentityNameList alloc] initWithGroupIdentity:self.groupIdentity];
+    self.window.contentView = self.list.view;
 }
 
 @end

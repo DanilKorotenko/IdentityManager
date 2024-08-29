@@ -166,6 +166,11 @@
     return uuidString;
 }
 
+- (BOOL)isGroup
+{
+    return self.identityClass == kCSIdentityClassGroup;
+}
+
 - (BOOL)isEnabled
 {
     return (BOOL)CSIdentityIsEnabled(self.identity);
