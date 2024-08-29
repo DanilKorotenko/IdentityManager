@@ -7,11 +7,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "IdentityUtilities/IUIdentity.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface IdentityList : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
 
-- (instancetype)initWithIdentityQuery:(CSIdentityQueryRef)aGroupMemebershipQuery;
+- (instancetype)initWithGroupIdentity:(IUIdentity *)aGroupIdentity;
 
 @end
 

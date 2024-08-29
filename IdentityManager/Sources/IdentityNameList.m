@@ -16,6 +16,7 @@
 @property (strong) IBOutlet NSTableView *usersTable;
 @property (strong) IBOutlet NSSearchField *searchField;
 @property (strong) IBOutlet NSPopUpButton *authorityPopup;
+@property (strong) IBOutlet NSButton    *includeHidden;
 
 @property (readonly) IUIdentityQueryNameWatcher *queryNameWatcher;
 
@@ -44,7 +45,7 @@
 
 - (instancetype)initGroups
 {
-    self = [self init];
+    self = [super initWithNibName:@"IdentityNameList" bundle:[NSBundle mainBundle]];
     if (self)
     {
         identityClass = kCSIdentityClassGroup;
@@ -63,9 +64,12 @@
 - (void)restartQuery
 {
     NSInteger tag = self.authorityPopup.selectedItem.tag;
+    BOOL includeHiddenFlag = self.includeHidden.state == NSControlStateValueOn;
+
     [self.queryNameWatcher startForName:self.searchField.stringValue
         authority:(IUIdentityQueryAuthority)tag
         identityClass:self.identityClass
+        includeHidden:includeHiddenFlag
         eventBlock:
         ^(CSIdentityQueryEvent event, NSError * _Nonnull anError)
         {
@@ -122,10 +126,15 @@
     IUIdentity *identity = [self.identitites objectAtIndex:selectedRow];
     if (identity.isGroup)
     {
-        IdentityListWindow *newWindow = [[IdentityListWindow alloc] initWithQuery:identity.groupMemebershipQuery
+        IdentityListWindow *newWindow = [[IdentityListWindow alloc] initWithGroupIdentity:identity
             name:identity.fullName];
         [newWindow showWindow:nil];
     }
+}
+
+- (IBAction)includeHiddenDidChange:(id)sender
+{
+    [self restartQuery];
 }
 
 @end

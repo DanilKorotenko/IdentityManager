@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startForName:(NSString *)aName
     authority:(IUIdentityQueryAuthority)anAuthority
     identityClass:(CSIdentityClass)anIdentityClass
+    includeHidden:(BOOL)anIncludeHidden
     eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
 - (void)stop;
 

@@ -18,12 +18,12 @@
 
 @implementation IdentityListWindow
 
-- (instancetype)initWithQuery:(CSIdentityQueryRef)aGroupMemebershipQuery name:(NSString *)aName
+- (instancetype)initWithGroupIdentity:(IUIdentity *)aGroupIdentity name:(NSString *)aName
 {
     self = [super initWithWindowNibName:@"IdentityListWindow"];
     if (self)
     {
-        self.list = [[IdentityList alloc] initWithIdentityQuery:aGroupMemebershipQuery];
+        self.list = [[IdentityList alloc] initWithGroupIdentity:aGroupIdentity];
         self.name = aName;
     }
     return self;

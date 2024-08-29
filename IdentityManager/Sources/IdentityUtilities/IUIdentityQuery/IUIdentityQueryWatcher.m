@@ -29,16 +29,19 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
     [me queryEvent:event identities:identities error:error];
 }
 
-- (void)startWithEventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
+- (void)startWithIncludeHidden:(BOOL)anIncludeHidden
+    eventBlock:(void (^)(CSIdentityQueryEvent, NSError * _Nonnull))anEventBlock
 {
     self.eventBlock = anEventBlock;
 
     CSIdentityQueryClientContext clientContext = { 0, (__bridge void *)(self), NULL, NULL, NULL, QueryEventCallback };
 
+    CSIdentityQueryFlags flags = anIncludeHidden ?
+        kCSIdentityQueryGenerateUpdateEvents | kCSIdentityQueryIncludeHiddenIdentities :
+        kCSIdentityQueryGenerateUpdateEvents;
+
     /* Run the query asynchronously and we'll get callbacks sent to our QueryEventCallback function. */
-    CSIdentityQueryExecuteAsynchronously(self.identityQuery,
-        kCSIdentityQueryGenerateUpdateEvents | kCSIdentityQueryIncludeHiddenIdentities,
-        &clientContext,
+    CSIdentityQueryExecuteAsynchronously(self.identityQuery, flags, &clientContext,
         CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
 }
 

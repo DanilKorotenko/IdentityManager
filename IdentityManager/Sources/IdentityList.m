@@ -14,7 +14,9 @@
 @interface IdentityList ()
 
 @property (strong) IBOutlet NSTableView *usersTable;
+@property (strong) IBOutlet NSButton    *includeHidden;
 
+@property (strong) IUIdentity *groupIdentity;
 @property (strong) IUIdentityQueryWatcher *queryWatcher;
 
 @property (readonly) NSArray *identitites;
@@ -36,12 +38,12 @@
 }
 
 
-- (instancetype)initWithIdentityQuery:(CSIdentityQueryRef)aGroupMemebershipQuery
+- (instancetype)initWithGroupIdentity:(IUIdentity *)aGroupIdentity
 {
     self = [self init];
     if (self)
     {
-        self.queryWatcher = [[IUIdentityQueryWatcher alloc] initWithIdentityQuery:aGroupMemebershipQuery];
+        self.groupIdentity = aGroupIdentity;
     }
     return self;
 }
@@ -55,7 +57,15 @@
 
 - (void)restartQuery
 {
-    [self.queryWatcher startWithEventBlock:
+    if (self.queryWatcher)
+    {
+        [self.queryWatcher stop];
+    }
+
+    self.queryWatcher = [[IUIdentityQueryWatcher alloc]
+        initWithIdentityQuery:self.groupIdentity.groupMemebershipQuery];;
+    BOOL includeHiddenFlag = self.includeHidden.state == NSControlStateValueOn;
+    [self.queryWatcher startWithIncludeHidden:includeHiddenFlag eventBlock:
         ^(CSIdentityQueryEvent event, NSError * _Nonnull anError)
         {
             self->identitites = nil;
@@ -101,10 +111,16 @@
     IUIdentity *identity = [self.identitites objectAtIndex:selectedRow];
     if (identity.isGroup)
     {
-        IdentityListWindow *newWindow = [[IdentityListWindow alloc] initWithQuery:identity.groupMemebershipQuery
+        IdentityListWindow *newWindow = [[IdentityListWindow alloc] initWithGroupIdentity:identity
             name:identity.fullName];
         [newWindow showWindow:nil];
     }
+}
+
+- (IBAction)includeHiddenDidChange:(id)sender
+{
+    [self.queryWatcher stop];
+    [self restartQuery];
 }
 
 @end

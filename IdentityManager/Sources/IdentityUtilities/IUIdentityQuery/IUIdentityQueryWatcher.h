@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IUIdentityQueryWatcher : IUIdentityQuery
 
-- (void)startWithEventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
+- (void)startWithIncludeHidden:(BOOL)anIncludeHidden
+    eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock;
 - (void)stop;
 
 @end

@@ -29,6 +29,7 @@ void QueryNameEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event
 - (void)startForName:(NSString *)aName
     authority:(IUIdentityQueryAuthority)anAuthority
     identityClass:(CSIdentityClass)anIdentityClass
+    includeHidden:(BOOL)anIncludeHidden
     eventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
 {
     [self stop];
@@ -44,10 +45,12 @@ void QueryNameEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event
         kCSIdentityQueryStringBeginsWith,
         anIdentityClass, [self authorityForType:anAuthority]);
 
+    CSIdentityQueryFlags flags = anIncludeHidden ?
+        kCSIdentityQueryGenerateUpdateEvents | kCSIdentityQueryIncludeHiddenIdentities :
+        kCSIdentityQueryGenerateUpdateEvents;
+
     /* Run the query asynchronously and we'll get callbacks sent to our QueryEventCallback function. */
-    CSIdentityQueryExecuteAsynchronously(self.identityQuery,
-        kCSIdentityQueryGenerateUpdateEvents | kCSIdentityQueryIncludeHiddenIdentities,
-        &clientContext,
+    CSIdentityQueryExecuteAsynchronously(self.identityQuery, flags, &clientContext,
         CFRunLoopGetCurrent(), kCFRunLoopCommonModes);
 }
 
