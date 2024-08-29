@@ -31,8 +31,6 @@ void QueryEventCallback(CSIdentityQueryRef query, CSIdentityQueryEvent event, CF
 
 - (void)startWithEventBlock:(void (^)(CSIdentityQueryEvent event, NSError *anError))anEventBlock
 {
-    [self stop];
-
     self.eventBlock = anEventBlock;
 
     CSIdentityQueryClientContext clientContext = { 0, (__bridge void *)(self), NULL, NULL, NULL, QueryEventCallback };

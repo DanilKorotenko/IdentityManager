@@ -12,17 +12,19 @@
 @interface IdentityListWindow ()
 
 @property(strong) IdentityList *list;
+@property(strong) NSString *name;
 
 @end
 
 @implementation IdentityListWindow
 
-- (instancetype)initWithQuery:(CSIdentityQueryRef)aGroupMemebershipQuery
+- (instancetype)initWithQuery:(CSIdentityQueryRef)aGroupMemebershipQuery name:(NSString *)aName
 {
     self = [super initWithWindowNibName:@"IdentityListWindow"];
     if (self)
     {
         self.list = [[IdentityList alloc] initWithIdentityQuery:aGroupMemebershipQuery];
+        self.name = aName;
     }
     return self;
 }
@@ -31,6 +33,7 @@
 {
     [super windowDidLoad];
     self.window.contentView = self.list.view;
+    self.window.title = self.name;
 }
 
 @end

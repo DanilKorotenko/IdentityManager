@@ -122,7 +122,8 @@
     IUIdentity *identity = [self.identitites objectAtIndex:selectedRow];
     if (identity.isGroup)
     {
-        IdentityListWindow *newWindow = [[IdentityListWindow alloc] initWithQuery:identity.groupMemebershipQuery];
+        IdentityListWindow *newWindow = [[IdentityListWindow alloc] initWithQuery:identity.groupMemebershipQuery
+            name:identity.fullName];
         [newWindow showWindow:nil];
     }
 }

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IdentityListWindow : NSWindowController
 
-- (instancetype)initWithQuery:(CSIdentityQueryRef)aGroupMemebershipQuery;
+- (instancetype)initWithQuery:(CSIdentityQueryRef)aGroupMemebershipQuery name:(NSString *)aName;
 
 @end
 
