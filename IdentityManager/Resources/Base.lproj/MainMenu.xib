@@ -692,19 +692,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hr-9L-5Hd">
-                        <rect key="frame" x="-8" y="-10" width="496" height="376"/>
+                        <rect key="frame" x="-8" y="-10" width="496" height="356"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Users" identifier="users" id="PWT-Lh-PWJ">
                                 <view key="view" id="Jgm-PD-biP">
-                                    <rect key="frame" x="10" y="33" width="476" height="330"/>
+                                    <rect key="frame" x="10" y="33" width="476" height="310"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Groups" identifier="groups" id="U6o-0U-QcL">
                                 <view key="view" id="XDU-nj-eHH">
-                                    <rect key="frame" x="10" y="33" width="476" height="330"/>
+                                    <rect key="frame" x="10" y="33" width="476" height="310"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
