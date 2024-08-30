@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		DA76BED32C74D7C7004946A9 /* IdentityManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IdentityManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA76BED32C74D7C7004946A9 /* IdentityUtility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IdentityUtility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA76BEF42C74D814004946A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DA76BEE12C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "IdentityManager" target */ = {
+		DA76BEE12C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "IdentityUtility" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"/Localized: Resources/MainMenu.xib",
 			);
-			target = DA76BED22C74D7C7004946A9 /* IdentityManager */;
+			target = DA76BED22C74D7C7004946A9 /* IdentityUtility */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		DA76BEE52C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "Copy Bundle Resources" phase from "IdentityManager" target */ = {
+		DA76BEE52C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "Copy Bundle Resources" phase from "IdentityUtility" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DA76BED12C74D7C7004946A9 /* Resources */;
 			membershipExceptions = (
@@ -35,8 +35,8 @@
 		DA76BED52C74D7C7004946A9 /* IdentityManager */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DA76BEE12C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "IdentityManager" target */,
-				DA76BEE52C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "Copy Bundle Resources" phase from "IdentityManager" target */,
+				DA76BEE12C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "IdentityUtility" target */,
+				DA76BEE52C74D7C8004946A9 /* Exceptions for "IdentityManager" folder in "Copy Bundle Resources" phase from "IdentityUtility" target */,
 			);
 			path = IdentityManager;
 			sourceTree = "<group>";
@@ -66,7 +66,7 @@
 		DA76BED42C74D7C7004946A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA76BED32C74D7C7004946A9 /* IdentityManager.app */,
+				DA76BED32C74D7C7004946A9 /* IdentityUtility.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,9 +74,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA76BED22C74D7C7004946A9 /* IdentityManager */ = {
+		DA76BED22C74D7C7004946A9 /* IdentityUtility */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA76BEE22C74D7C8004946A9 /* Build configuration list for PBXNativeTarget "IdentityManager" */;
+			buildConfigurationList = DA76BEE22C74D7C8004946A9 /* Build configuration list for PBXNativeTarget "IdentityUtility" */;
 			buildPhases = (
 				DA76BECF2C74D7C7004946A9 /* Sources */,
 				DA76BED02C74D7C7004946A9 /* Frameworks */,
@@ -89,11 +89,11 @@
 			fileSystemSynchronizedGroups = (
 				DA76BED52C74D7C7004946A9 /* IdentityManager */,
 			);
-			name = IdentityManager;
+			name = IdentityUtility;
 			packageProductDependencies = (
 			);
 			productName = IdentityManager;
-			productReference = DA76BED32C74D7C7004946A9 /* IdentityManager.app */;
+			productReference = DA76BED32C74D7C7004946A9 /* IdentityUtility.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -124,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA76BED22C74D7C7004946A9 /* IdentityManager */,
+				DA76BED22C74D7C7004946A9 /* IdentityUtility */,
 			);
 		};
 /* End PBXProject section */
@@ -171,7 +171,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danilkorotenko.IdentityManager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danilkorotenko.IdentityUtility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -198,7 +198,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danilkorotenko.IdentityManager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danilkorotenko.IdentityUtility;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA76BEE22C74D7C8004946A9 /* Build configuration list for PBXNativeTarget "IdentityManager" */ = {
+		DA76BEE22C74D7C8004946A9 /* Build configuration list for PBXNativeTarget "IdentityUtility" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA76BEE32C74D7C8004946A9 /* Debug */,
